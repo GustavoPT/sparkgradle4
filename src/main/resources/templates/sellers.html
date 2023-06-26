@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <h3>List of Sellers</h3>
+        <a th:href="@{/seller/add}" class="btn btn-primary" type="button">Add Seller</a>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+	                <th>Seller Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="seller : ${sellers}">
+                    <td data-th-text="${seller.name}">...</td>
+                    <td><a th:href="@{/seller/edit?sellerId=}+${seller.id}">Edit</a></td>
+                    <td><a th:href="@{/seller/delete?sellerId=}+${seller.id}">delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

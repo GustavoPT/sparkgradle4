@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+
+<div class="container main">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Transactions Information</h3>
+            <form  th:action="@{/transaction/save}" method="post" >
+                <input type="hidden" name="id" th:value="${transaction.id}" />
+
+				<div class="form-group">
+                	<label for="productName">Product Name</label>
+                		<select  name = "product" id=productName>
+                			<option th:each="item : ${products}"
+						         th:value="${item.name}"
+						         th:selected="${item.name} == ${product.name} ? true : false"
+						         th:text="${item.name}">
+						     </option>
+                        </select>
+				</div>
+                
+                <div class="form-group">
+                    <label for="transactionAmount">Amount</label>
+                    <input type="number" class="form-control" th:value="${transaction.amount}" name="amount"
+                           id="transactionAmount" placeholder="Amount"/>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDate">Date</label>
+                    <input type="date" class="form-control" th:value="${transaction.date}" name="date"
+                           id="transactionDate" placeholder="Date"/>
+                </div>
+                
+                   
+                <div class="form-group">
+                	<label for="cardCode">Card Code</label>
+                		<select name = "card" id=cardCode>
+                			<option th:each="item : ${cards}"
+						         th:value="${item.code}"
+						         th:selected="${item.code} == ${card.code} ? true : false"
+						         th:text="${item.code}">
+						     </option>
+                        </select>
+				</div>
+				
+				<div class="form-group">
+                	<label for="accountType">Account</label>
+						<select name = "account" id=accountType th:value="${account.type}">
+						<option th:each="item : ${accounts}"
+						         th:value="${item.type}"
+						         th:selected="${item.type} == ${account.type} ? true : false"
+						         th:text="${item.type}">
+						     </option>
+                        </select>
+				</div>
+                
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <button class="btn btn-primary" type="submit">Edit Transaction</button>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+    <div class="row">
+        <h3>List of Accounts</h3>
+        <a th:href="@{/account/add}" class="btn btn-primary" type="button">Add Account</a>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Account Type</th>
+                    <th>Account Balance</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="account : ${accounts}">
+                    <td data-th-text="${account.type}">...</td>
+                    <td data-th-text="${account.balance}">...</td>
+                    <td><a th:href="@{/account/edit?accountType=}+${account.type}">Edit</a></td>
+                    <td><a th:href="@{/account/delete?accountType=}+${account.type}">delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

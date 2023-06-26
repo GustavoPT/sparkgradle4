@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+
+<div class="container main">
+    <div class="row">
+        <h3>List of Transactions</h3>
+        <a th:href="@{/transaction/add}" class="btn btn-primary" type="button">Add Transaction</a>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                	<th>Product Name</th>
+                	<th>Transaction Amount</th>
+                    <th>Transaction Date</th>
+                    <th>Transaction Card Code</th>
+                    <th>Transaction Account</th>
+                    <th>Transaction Seller</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="transaction : ${transactions}">
+                    <td data-th-text="${transaction.product.name}">...</td>
+                    <td data-th-text="${transaction.amount}">...</td>
+                    <td data-th-text="${transaction.date}">...</td>
+                    <td data-th-text="${transaction.card.code}">...</td>
+                    <td data-th-text="${transaction.account.type}">...</td>
+                    <td data-th-text="${transaction.product.seller.name}">...</td>
+                    <td><a th:href="@{/transaction/edit?transactionId=}+${transaction.id}">Edit</a></td>
+                    <td><a th:href="@{/transaction/delete?transactionId=}+${transaction.id}">delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

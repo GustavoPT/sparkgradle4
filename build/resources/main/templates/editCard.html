@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container main">
+
+<div class="row">
+		<th:block th:each="card : ${cards}">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <img  th:src="@{${'/images/'+card.image}}" width="100px"/>
+                        </div>
+                    </div><div th:text="'Card Number: '+${card.code}"> </div>
+                </div>
+            </div>
+        </div>
+        </th:block>
+        </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Card Information</h3>
+            <form  th:action="@{/card/save}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:value="${card.id}" />
+
+                <div class="form-group">
+                    <label for="cardNumber">Number</label>
+                    <input type="number" class="form-control" th:value="${card.number}" name="number"
+                           id="cardNumber" placeholder="Number"/>
+                </div>
+                <div class="form-group">
+                    <label for="cardName">Name</label>
+                    <input type="text" class="form-control" th:value="${card.name}" name="name"
+                           id="cardName" placeholder="Name"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardYear">Year</label>
+                    <input type="number" class="form-control" th:value="${card.year}" name="year"
+                           id="cardYear" placeholder="Year"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cardCode">Code</label>
+                    <input type="number" class="form-control" th:value="${card.code}" name="code"
+                           id="cardCode" placeholder="Code"/>
+                </div>
+                <div class="form-group">
+                    <label for="cardMonth">Month</label>
+                    <input type="number" class="form-control" th:value="${card.month}" name="month"
+                           id="cardMonth" placeholder="Month"/>
+                </div>
+                
+                <label for="cardImage">Image</label>
+                        <input type="file" id=cardImage name="image" class="form-control" th:value="${card.image}">
+               
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <button class="btn btn-primary" type="submit">Edit Card</button>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+    <br/>
+    
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

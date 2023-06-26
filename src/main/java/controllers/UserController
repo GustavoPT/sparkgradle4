@@ -1,0 +1,64 @@
+package controllers;
+
+import spark.Request;
+import spark.Response;
+
+import static spark.Spark.get;
+
+public class UserController {
+
+    public static void userRoutes() {
+        get("/users", (req, res) -> "User list");
+        get("/users/:id", (req, res) -> {
+            String userId = req.params("id");
+            return "User ID: " + userId;
+        });
+        // Add more routes specific to user
+    }
+
+    // Handler for retrieving all users
+    public static String getAllUsers(Request request, Response response) {
+        // Logic to fetch all users from the database
+        // ...
+
+        return "List of all users";
+    }
+
+    // Handler for retrieving a user by ID
+    public static String getUserById(Request request, Response response) {
+        String id = request.params("id");
+
+        // Logic to fetch a user with the specified ID from the database
+        // ...
+
+        return "User with ID: " + id;
+    }
+
+    // Handler for creating a new user
+    public static String createUser(Request request, Response response) {
+        // Logic to create a new user based on the request body
+        // ...
+
+        return "New user created";
+    }
+
+    // Handler for updating a user
+    public static String updateUser(Request request, Response response) {
+        String id = request.params("id");
+
+        // Logic to update the user with the specified ID based on the request body
+        // ...
+
+        return "User with ID " + id + " updated";
+    }
+
+    // Handler for deleting a user
+    public static String deleteUser(Request request, Response response) {
+        String id = request.params("id");
+
+        // Logic to delete the user with the specified ID from the database
+        // ...
+
+        return "User with ID " + id + " deleted";
+    }
+}
